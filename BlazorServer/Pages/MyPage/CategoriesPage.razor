@@ -1,0 +1,16 @@
+﻿@page "/Categories"
+@using BlazorServer.Data
+<h3>Category List</h3>
+@inject ICategoriesRepository _categoriesRepository
+
+<PageTitle>Category List</PageTitle>
+@foreach (var category in _categoriesRepository.GetCategories())
+{
+    <ul>
+        <li>@category.Name</li>
+    </ul>}
+
+
+@code {
+    
+};

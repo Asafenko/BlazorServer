@@ -1,0 +1,30 @@
+﻿@page "/"
+@using BlazorServer.Data
+@inject ITimeServer _Time
+
+<PageTitle>Index</PageTitle>
+
+<h1>Find All</h1>
+
+<h2>Welcome to online store!!!</h2>
+
+<h3>Time: @_Time.GetTime()</h3>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        _ = RefreshTime();
+    }
+
+    bool flag = false;
+    private async Task RefreshTime()
+    {
+        while (!flag)
+        {
+            await Task.Delay(TimeSpan.FromMilliseconds(1));
+            _Time.GetTime();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+}

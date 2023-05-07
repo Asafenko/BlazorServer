@@ -1,0 +1,18 @@
+﻿@page "/Shop"
+@using BlazorServer.Data.Product
+@inject IShopCart _ShopCart
+<PageTitle>Basket List</PageTitle>
+<h3>Basket List</h3>
+@foreach (var choose in _ShopCart.GetShopProduct())
+{
+    <div class="myClass">
+        <img src="@choose.Picture"/>
+        <ul>
+            <li>Category: @choose.Category</li>
+            <li>Name: @choose.Name</li>
+            <li>Price: @choose.Price</li>
+            <li>Description: @choose.Description</li>
+            <li>Count: @choose.Count</li>
+        </ul>
+    </div>
+}

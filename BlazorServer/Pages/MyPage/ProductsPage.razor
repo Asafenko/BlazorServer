@@ -1,0 +1,34 @@
+﻿@page "/Products"
+@using BlazorServer.Data.Product
+@inject ICatalogProduct _Product
+@inject IShopCart _ShopCart
+@inject IToastService _Service
+
+<PageTitle>Product List</PageTitle>
+
+
+<h3>Product List</h3>
+@foreach (var product in _Product.GetProducts())
+{
+    <div class="myClass">
+        <img src="@product.Picture"/>
+        <ul>
+            <li>Category: @product.Category</li>
+            <li>Name: @product.Name</li>
+            <li>Price: @product.Price</li>
+            <li>Description: @product.Description</li>
+            <li>Count: @product.Count</li>
+        </ul>
+    </div>
+    <button @onclick="@(()=> Add(product))">Add</button>
+}
+
+@code {
+
+    private void Add(Product product)
+    {
+        _ShopCart.AddProductInCart(product);
+        _Service.ShowSuccess("I'm a SUCCESS message with a custom title", "Congratulations!");
+    }
+
+};
